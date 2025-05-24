@@ -1,0 +1,1 @@
+{"type":"module","dependencies":{"chalk":"^5.4.1","dotenv":"^16.5.0","inquirer":"^12.6.2","jsdom":"^26.1.0","node-fetch":"^2.7.0"},"devDependencies":{"@types/jsdom":"^21.1.7","@types/node":"^22.15.21","@types/node-fetch":"^2.6.12","ts-node":"^10.9.2","typescript":"^5.8.3"}}
