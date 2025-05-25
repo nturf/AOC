@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+
+SCRIPT=$1
+ARG2=$2
+ARG3=$3
+
+# Default year
+YEAR=2015
+DAY=""
+
+# Argument handling
+if [[ "$ARG2" =~ ^[0-9]+$ && "$ARG2" -le 31 ]]; then
+    # Called like ./aoc.sh pull 5 (assume default year)
+    DAY=$ARG2
+elif [[ "$ARG2" =~ ^[0-9]+$ ]]; then
+    # Called like ./aoc.sh pull 16 5 or 2016 5
+    YEAR=$ARG2
+    DAY=$ARG3
+else
+    echo "Invalid or missing day/year arguments."
+    echo "Usage:"
+    echo "  ./aoc.sh pull 5         # Defaults to 2015 Day 05"
+    echo "  ./aoc.sh sub 16 3       # Runs run.ts for 2016 Day 03"
+    exit 1
+fi
+
+# Expand short year (like "15") to full year
+if [ "${#YEAR}" -eq 2 ]; then
+    YEAR="20$YEAR"
+fi
+
+# Pad day
+DAY_PADDED=$(printf "%02d" "$DAY")
+
+# Run appropriate script
+if [ "$SCRIPT" = "pull" ]; then
+    echo "Running setup.ts for $YEAR Day $DAY_PADDED"
+    ts-node setup.ts "$YEAR" "$DAY_PADDED"
+elif [ "$SCRIPT" = "sub" ]; then
+    echo "Running run.ts for $YEAR Day $DAY_PADDED"
+    ts-node run.ts "$YEAR" "$DAY_PADDED"
+else
+    echo "Unknown script: $SCRIPT"
+    echo "Use 'pull' for setup.ts or 'sub' for run.ts"
+    exit 1
+fi
+
