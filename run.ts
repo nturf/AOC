@@ -87,12 +87,15 @@ async function submitAnswer(year: string, day: string, level: "1" | "2", answer:
             const html = await puzzleRes.text();
             const dom = new JSDOM(html);
             const articles = dom.window.document.querySelectorAll("article");
-            const fullPuzzle = Array.from(articles).map(a => a.outerHTML).join("\n\n");
+            const fullPuzzle = Array.from(articles)
+                .map(a => a.textContent?.trim() || "")
+                .join("\n\n");
 
             const readmePath = path.join(dayPath, "README.md");
             fs.writeFileSync(readmePath, fullPuzzle);
             console.log("README.md updated with part 2.");
         }
+
 
         return true;
     } else if (text.includes("That's not the right answer")) {
@@ -115,7 +118,7 @@ const runPart = async (part: "part1" | "part2") => {
     const partModule = await import(modulePath);
     const result = partModule.default(input);
 
-    console.log(`🧪 Output from ${part}:`, result);
+    console.log(`Output from ${part}:`, result);
 
     if (submitted) {
         console.log(`${part} already submitted. Skipping submission prompt.`);
@@ -141,15 +144,6 @@ const runPart = async (part: "part1" | "part2") => {
                     const proceed = await ask("Proceed to part2? (Y/n): ");
                     if (proceed !== "n") {
                         await runPart("part2");
-                    }
-                }
-
-                if (part === "part2") {
-                    const nextDay = String(Number(day) + 1).padStart(2, "0");
-                    const next = await ask(`Generate setup for day ${nextDay}? (Y/n): `);
-                    if (next !== "n") {
-                        const { exec } = await import("child_process");
-                        exec(`ts-node setup.ts ${year} ${nextDay}`);
                     }
                 }
             }
