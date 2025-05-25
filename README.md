@@ -1,4 +1,6 @@
 # 🎄 Advent of Code Automation & Solutions
+[![AOC](https://i.postimg.cc/Kctbk2k8/screenshot-1748181428.png)](https://github.com/sbytex/AOC)
+
 
 Welcome to my personal [Advent of Code](https://adventofcode.com/) repo!  
 This contains solutions, input data, and automation scripts that help streamline solving puzzles day by day.
