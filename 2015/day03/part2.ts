@@ -1,10 +1,13 @@
 export default function solve(input: string): string | number {
-    let santaX = 0, santaY = 0
-    let roboX = 0, roboY = 0
-    let uniqueHouse = new Set()
-    uniqueHouse.add("0,0")
+    let santaX = 0
+    let santaY = 0
+    let roboX = 0
+    let roboY = 0
+    let houseVisited = new Set()
+    houseVisited.add("0,0")
 
-    function outDir(x: number, y: number, dir: string): [number, number] {
+    function sepDir(x: number, y: number, dir: string): [number, number] {
+
         if (dir === "^") y += 1
         else if (dir === ">") x += 1
         else if (dir === "v") y -= 1
@@ -14,18 +17,16 @@ export default function solve(input: string): string | number {
     }
 
     for (let index = 0; index < input.length; index++) {
-        const dir = input[index];
+        let dir = input[index]
+
         if (index % 2 === 0) {
-            [santaX, santaY] = outDir(santaX, santaY, dir)
-            uniqueHouse.add(`${santaX}, ${santaY}`)
+            [santaX, santaY] = sepDir(santaX, santaY, dir)
+            houseVisited.add(`${santaX},${santaY}`)
         } else {
-            [roboX, roboY] = outDir(roboX, roboY, dir)
-            uniqueHouse.add(`${roboX}, ${roboY}`)
+            [roboX, roboY] = sepDir(roboX, roboY, dir)
+            houseVisited.add(`${roboX},${roboY}`)
         }
 
     }
-    return uniqueHouse.size
-
-
-
+    return houseVisited.size
 }
