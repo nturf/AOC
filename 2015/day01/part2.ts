@@ -1,5 +1,5 @@
 export default function solve(input: string): string | number {
-    let val = 0
+    let val = 1
     for (let index = 0; index < input.length; index++) {
         const element = input[index];
         if (element === "(") {
@@ -8,11 +8,11 @@ export default function solve(input: string): string | number {
             val--
         }
         if (val === -1) {
-            return index + 1
+            return index
         }
 
     }
-    return -1
+    return val
 
 }
 
