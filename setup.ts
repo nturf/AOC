@@ -24,7 +24,6 @@ const fetchInput = async () => {
     const res = await fetch(url, {
         headers: {
             cookie: `session=${session}`,
-            "User-Agent": "github.com/sbytex/AOC",
         },
     });
 
@@ -40,7 +39,6 @@ const fetchDescription = async () => {
     const res = await fetch(url, {
         headers: {
             cookie: `session=${session}`,
-            "User-Agent": "github.com/sbytex/AOC",
         },
     });
 

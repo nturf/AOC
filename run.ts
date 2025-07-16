@@ -65,7 +65,6 @@ async function submitAnswer(year: string, day: string, level: "1" | "2", answer:
         headers: {
             "Content-Type": "application/x-www-form-urlencoded",
             "Cookie": `session=${session}`,
-            "User-Agent": "github.com/sbytex/AOC"
         },
         body: `level=${level}&answer=${encodeURIComponent(answer)}`
     });
@@ -80,7 +79,6 @@ async function submitAnswer(year: string, day: string, level: "1" | "2", answer:
             const puzzleRes = await fetch(`https://adventofcode.com/${year}/day/${Number(day)}`, {
                 headers: {
                     "Cookie": `session=${session}`,
-                    "User-Agent": "github.com/sbytex/AOC"
                 }
             });
 
